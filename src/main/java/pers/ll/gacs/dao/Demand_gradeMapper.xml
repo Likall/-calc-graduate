@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.ll.gacs.dao.Demand_gradeMapper" >
+  <resultMap id="BaseResultMap" type="pers.ll.gacs.po.Demand_grade" >
+    <id column="demand_grade_id" property="demandGradeId" jdbcType="VARCHAR" />
+    <result column="demand_grade" property="demandGrade" jdbcType="DOUBLE" />
+    <result column="demand_total_grade" property="demandTotalGrade" jdbcType="DOUBLE" />
+    <result column="demand_id_2" property="demandId2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    demand_grade_id, demand_grade, demand_total_grade, demand_id_2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.ll.gacs.po.Demand_gradeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from demand_grade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from demand_grade
+    where demand_grade_id = #{demandGradeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from demand_grade
+    where demand_grade_id = #{demandGradeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.ll.gacs.po.Demand_gradeExample" >
+    delete from demand_grade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.ll.gacs.po.Demand_grade" >
+    insert into demand_grade (demand_grade_id, demand_grade, demand_total_grade, 
+      demand_id_2)
+    values (#{demandGradeId,jdbcType=VARCHAR}, #{demandGrade,jdbcType=DOUBLE}, #{demandTotalGrade,jdbcType=DOUBLE}, 
+      #{demandId2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.ll.gacs.po.Demand_grade" >
+    insert into demand_grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="demandGradeId != null" >
+        demand_grade_id,
+      </if>
+      <if test="demandGrade != null" >
+        demand_grade,
+      </if>
+      <if test="demandTotalGrade != null" >
+        demand_total_grade,
+      </if>
+      <if test="demandId2 != null" >
+        demand_id_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="demandGradeId != null" >
+        #{demandGradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="demandGrade != null" >
+        #{demandGrade,jdbcType=DOUBLE},
+      </if>
+      <if test="demandTotalGrade != null" >
+        #{demandTotalGrade,jdbcType=DOUBLE},
+      </if>
+      <if test="demandId2 != null" >
+        #{demandId2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.ll.gacs.po.Demand_gradeExample" resultType="java.lang.Integer" >
+    select count(*) from demand_grade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update demand_grade
+    <set >
+      <if test="record.demandGradeId != null" >
+        demand_grade_id = #{record.demandGradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandGrade != null" >
+        demand_grade = #{record.demandGrade,jdbcType=DOUBLE},
+      </if>
+      <if test="record.demandTotalGrade != null" >
+        demand_total_grade = #{record.demandTotalGrade,jdbcType=DOUBLE},
+      </if>
+      <if test="record.demandId2 != null" >
+        demand_id_2 = #{record.demandId2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update demand_grade
+    set demand_grade_id = #{record.demandGradeId,jdbcType=VARCHAR},
+      demand_grade = #{record.demandGrade,jdbcType=DOUBLE},
+      demand_total_grade = #{record.demandTotalGrade,jdbcType=DOUBLE},
+      demand_id_2 = #{record.demandId2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.ll.gacs.po.Demand_grade" >
+    update demand_grade
+    <set >
+      <if test="demandGrade != null" >
+        demand_grade = #{demandGrade,jdbcType=DOUBLE},
+      </if>
+      <if test="demandTotalGrade != null" >
+        demand_total_grade = #{demandTotalGrade,jdbcType=DOUBLE},
+      </if>
+      <if test="demandId2 != null" >
+        demand_id_2 = #{demandId2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where demand_grade_id = #{demandGradeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.ll.gacs.po.Demand_grade" >
+    update demand_grade
+    set demand_grade = #{demandGrade,jdbcType=DOUBLE},
+      demand_total_grade = #{demandTotalGrade,jdbcType=DOUBLE},
+      demand_id_2 = #{demandId2,jdbcType=VARCHAR}
+    where demand_grade_id = #{demandGradeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

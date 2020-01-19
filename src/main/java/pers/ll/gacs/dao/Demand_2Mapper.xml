@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.ll.gacs.dao.Demand_2Mapper" >
+  <resultMap id="BaseResultMap" type="pers.ll.gacs.po.Demand_2" >
+    <id column="demand_2_id" property="demand2Id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="demand_1_id" property="demand1Id" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    demand_2_id, name, demand_1_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.ll.gacs.po.Demand_2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from demand_2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from demand_2
+    where demand_2_id = #{demand2Id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from demand_2
+    where demand_2_id = #{demand2Id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.ll.gacs.po.Demand_2Example" >
+    delete from demand_2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.ll.gacs.po.Demand_2" >
+    insert into demand_2 (demand_2_id, name, demand_1_id
+      )
+    values (#{demand2Id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{demand1Id,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pers.ll.gacs.po.Demand_2" >
+    insert into demand_2
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="demand2Id != null" >
+        demand_2_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="demand1Id != null" >
+        demand_1_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="demand2Id != null" >
+        #{demand2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="demand1Id != null" >
+        #{demand1Id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.ll.gacs.po.Demand_2Example" resultType="java.lang.Integer" >
+    select count(*) from demand_2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update demand_2
+    <set >
+      <if test="record.demand2Id != null" >
+        demand_2_id = #{record.demand2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demand1Id != null" >
+        demand_1_id = #{record.demand1Id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update demand_2
+    set demand_2_id = #{record.demand2Id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      demand_1_id = #{record.demand1Id,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.ll.gacs.po.Demand_2" >
+    update demand_2
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="demand1Id != null" >
+        demand_1_id = #{demand1Id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where demand_2_id = #{demand2Id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.ll.gacs.po.Demand_2" >
+    update demand_2
+    set name = #{name,jdbcType=VARCHAR},
+      demand_1_id = #{demand1Id,jdbcType=VARCHAR}
+    where demand_2_id = #{demand2Id,jdbcType=VARCHAR}
+  </update>
+</mapper>

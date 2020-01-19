@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.ll.gacs.dao.UserMapper" >
+  <resultMap id="UserResultMap" type="pers.ll.gacs.po.User" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="role" property="role" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectAllUsers" resultType="pers.ll.gacs.po.User">
+    select * from user
+  </select>
+
+  <select id="validateUser" parameterType="java.util.HashMap" resultType="pers.ll.gacs.po.User">
+    select * from user t where t.account = #{account} and t.user_password=#{password}
+  </select>
+
+  <select id="selectUserByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1) from user t where t.account = #{account}
+  </select>
+</mapper>
