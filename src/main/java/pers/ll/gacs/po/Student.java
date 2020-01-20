@@ -11,8 +11,6 @@ public class Student {
 
     private String stuMale;
 
-    private String roleId;
-
     public String getStuId() {
         return stuId;
     }
@@ -51,13 +49,5 @@ public class Student {
 
     public void setStuMale(String stuMale) {
         this.stuMale = stuMale == null ? null : stuMale.trim();
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
     }
 }

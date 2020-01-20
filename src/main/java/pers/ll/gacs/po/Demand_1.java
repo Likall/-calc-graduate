@@ -5,6 +5,8 @@ public class Demand_1 {
 
     private String name;
 
+    private String evalResult;
+
     public String getDemand1Id() {
         return demand1Id;
     }
@@ -19,5 +21,13 @@ public class Demand_1 {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getEvalResult() {
+        return evalResult;
+    }
+
+    public void setEvalResult(String evalResult) {
+        this.evalResult = evalResult == null ? null : evalResult.trim();
     }
 }

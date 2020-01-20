@@ -80,6 +80,6 @@ public class User {
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.account = account == null ? null : account.trim();
     }
 }
