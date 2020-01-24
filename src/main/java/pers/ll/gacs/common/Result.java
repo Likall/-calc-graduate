@@ -41,7 +41,7 @@ public class Result {
     }
 
     public static Result ok(String msg) {
-        return new Result(Const.HttpStatusCode.HttpStatus_200, msg, new Object());
+        return new Result(Const.HttpStatusCode.HttpStatus_200, msg, null);
     }
 
     public Result() {

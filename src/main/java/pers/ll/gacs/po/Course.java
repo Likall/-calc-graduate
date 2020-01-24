@@ -60,4 +60,16 @@ public class Course {
     public void setCourseTotalGrade(String courseTotalGrade) {
         this.courseTotalGrade = courseTotalGrade == null ? null : courseTotalGrade.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", courseCredit='" + courseCredit + '\'' +
+                ", courseTerm='" + courseTerm + '\'' +
+                ", courseAverage=" + courseAverage +
+                ", courseTotalGrade='" + courseTotalGrade + '\'' +
+                '}';
+    }
 }

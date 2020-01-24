@@ -1,4 +1,4 @@
-package pers.ll.gacs;
+package pers.ll.gacs.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;

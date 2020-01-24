@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
+import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -12,8 +13,6 @@ import java.text.SimpleDateFormat;
 public class CustomMapper extends ObjectMapper {
     public CustomMapper() {
 //        this.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//        // 设置 SerializationFeature.FAIL_ON_EMPTY_BEANS 为 false
-//        this.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         //序列化的时候序列对象的所有属性
         this.setSerializationInclusion(JsonInclude.Include.ALWAYS);
 
@@ -34,6 +33,6 @@ public class CustomMapper extends ObjectMapper {
                 jsonGenerator.writeString("");
             }
         });
-
+        this.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     }
 }

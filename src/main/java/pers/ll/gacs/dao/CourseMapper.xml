@@ -9,4 +9,8 @@
     <result column="course_average" property="courseAverage" jdbcType="DOUBLE" />
     <result column="course_total_grade" property="courseTotalGrade" jdbcType="VARCHAR" />
   </resultMap>
+  <insert id="insertAllCourse" parameterType="pers.ll.gacs.po.Course">
+     insert into course(course_id, course_name, course_credit, course_term, course_average, course_total_grade)
+     values (#{courseId}, #{courseName}, #{courseCredit}, #{courseTerm}, #{courseAverage}, #{courseTotalGrade})
+  </insert>
 </mapper>
