@@ -1,4 +1,4 @@
-package pers.ll.gacs;
+package pers.ll.gacs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -49,7 +49,7 @@ public class UserController extends BaseController {
         if (!userService.existUser(user.getAccount())) {
             return Result.fail_401("用户不存在");
         }
-        user = userService.login(user.getUserName(), user.getUserPassword());
+        user = userService.login(user.getAccount(), user.getUserPassword());
         if (!ObjectUtils.isEmpty(user)) {
             result.setCode(Const.HttpStatusCode.HttpStatus_200);
             result.setMsg("登录成功");
@@ -61,8 +61,4 @@ public class UserController extends BaseController {
 
     }
 
-//    @RequestMapping(value = "/stu", method = RequestMethod.GET)
-//    public List<Student> stuList() {
-//        return studentService.getStus();
-//    }
 }

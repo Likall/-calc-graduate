@@ -32,7 +32,7 @@ public class importCsv {
 
         /**  * CSV文件导出测试  */
         {
-            List<String> datas = importCsv.importCsvs(new File("C:/Users/lika/Downloads/The original data (2).csv"));
+            List<String> datas = importCsv.importCsvs(new File("D:\\personal\\graduate_project\\fileOfCalc\\course\\指标点与课程关系.csv"));
             if ( datas != null && !datas.isEmpty()) {
                 for (String data : datas) {
                     System.out.println(data);

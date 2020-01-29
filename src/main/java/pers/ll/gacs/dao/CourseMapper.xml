@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pers.ll.gacs.dao.CourseMapper" >
-  <resultMap id="BaseResultMap" type="pers.ll.gacs.po.Course" >
+  <resultMap id="CourseResultMap" type="pers.ll.gacs.po.Course" >
     <id column="course_id" property="courseId" jdbcType="VARCHAR" />
     <result column="course_name" property="courseName" jdbcType="VARCHAR" />
     <result column="course_credit" property="courseCredit" jdbcType="VARCHAR" />
@@ -13,4 +13,33 @@
      insert into course(course_id, course_name, course_credit, course_term, course_average, course_total_grade)
      values (#{courseId}, #{courseName}, #{courseCredit}, #{courseTerm}, #{courseAverage}, #{courseTotalGrade})
   </insert>
+  <select id="queryAllCourse" resultMap="CourseResultMap">
+    select * from course
+  </select>
+  <update id="updateCourseByCourseId" parameterType="pers.ll.gacs.po.Course">
+    update course
+    <set>
+      <if test="courseName != null">
+        course_name = #{courseName},
+      </if>
+      <if test="courseCredit != null">
+        course_credit = #{courseCredit},
+      </if>
+      <if test="courseTerm != null">
+        course_term = #{courseTerm},
+      </if>
+      <if test="courseAverage != null">
+        course_average = #{courseAverage},
+      </if>
+      <if test="courseTotalGrade != null">
+        course_total_grade = #{courseTotalGrade}
+      </if>
+    </set>
+    <where>
+      course_id = #{courseId}
+    </where>
+  </update>
+  <delete id="deleteCourseByCourseId" parameterType="pers.ll.gacs.po.Course">
+    delete from course where course_id = #{courseId}
+  </delete>
 </mapper>
