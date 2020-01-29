@@ -42,18 +42,6 @@ public class FileController extends BaseController {
             }
             //把本地文件上传到封装上传文件位置的全路径
             file.transferTo(targetFile);
-//            face.setFileName(originalFilename);
-//            face.setPath(filePath+File.separator+originalFilename);
-//            if (faceService.isExists(face)) {
-//                if (faceService.update(face)) {
-//                    return Result.ok(name+"人脸图片修改成功");
-//                }
-//            }
-//            if (faceService.addFace(face)) {
-//                return Result.ok(name+"上传成功");
-//            } else {
-//                return Result.fail_500("上传失败");
-//            }
             return Result.fail_500("1212");
         } catch (Exception e) {
             // TODO Auto-generated catch block

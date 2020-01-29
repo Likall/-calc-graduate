@@ -92,11 +92,11 @@
             <version>1.9.13</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.18</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+            <!--<version>1.7.18</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -152,14 +152,24 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <!--  而在IDEA中目录是普通属性，所以它的（src/main/java）目录中的只有.java文件会默认编译，.xml文件不会被编译。      -->
         <resources>
+            <!--  在IDEA中目录是普通属性，所以它的（src/main/java）目录中的只有.java文件会默认编译，.xml文件不会被编译。      -->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>true</filtering>
+            </resource>
+            <!--读取不到配置文件的问题-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.tld</include>
+                </includes>
+                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
