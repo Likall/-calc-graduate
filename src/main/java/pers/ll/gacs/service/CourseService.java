@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ICourseServiceImpl implements ICourseService {
+public class CourseService implements ICourseService {
     @Autowired
     private CourseMapper courseMapper;
 
