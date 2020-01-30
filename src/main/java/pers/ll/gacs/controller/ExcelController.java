@@ -84,12 +84,18 @@ public class ExcelController extends BaseController{
             return Result.fail_500("文件不能为空");
         }
         Result result = Result.fail_500("上传失败");
+        List<Demand_1> list = new ArrayList<>();
         EasyExcel.read(file.getInputStream(), new DemandListener() {
             @Override
-            protected void onResult(List<Demand_1> demand1List) {
-                result.setCode(Const.HttpStatusCode.HttpStatus_200);
-                result.setMsg("毕业要求模板上传成功");
-                result.setData(demand1List);
+            protected void onResult(List<Demand_1> demand1List, boolean finished) {
+                if (finished) {
+                    result.setCode(Const.HttpStatusCode.HttpStatus_200);
+                    result.setMsg("毕业要求基础数据上传成功");
+                    result.setData(list);
+                } else {
+                    list.addAll(demand1List);
+                }
+
             }
         }).sheet().doRead();
         return result;
