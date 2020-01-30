@@ -1,11 +1,18 @@
 package pers.ll.gacs.po;
 
+import lombok.Data;
+
+import java.util.List;
+
 public class Demand_1 {
+
     private String demand1Id;
 
     private String name;
 
     private String evalResult;
+
+    private List<Demand_2> demand2List;
 
     public String getDemand1Id() {
         return demand1Id;
@@ -29,5 +36,13 @@ public class Demand_1 {
 
     public void setEvalResult(String evalResult) {
         this.evalResult = evalResult == null ? null : evalResult.trim();
+    }
+
+    public List<Demand_2> getDemand2List() {
+        return demand2List;
+    }
+
+    public void setDemand2List(List<Demand_2> demand2List) {
+        this.demand2List = demand2List;
     }
 }

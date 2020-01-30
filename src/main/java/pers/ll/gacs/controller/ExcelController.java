@@ -1,15 +1,16 @@
 package pers.ll.gacs.controller;
 
+import com.alibaba.excel.EasyExcel;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pers.ll.gacs.common.Const;
 import pers.ll.gacs.common.Result;
-import pers.ll.gacs.po.Course;
+import pers.ll.gacs.po.Demand_1;
 import pers.ll.gacs.utils.ExcelUtils;
-import sun.security.util.ECUtil;
+import pers.ll.gacs.utils.easyexcel.DemoDAO;
+import pers.ll.gacs.utils.easyexcel.DemoData;
+import pers.ll.gacs.utils.easyexcel.DemoDataListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,9 +23,8 @@ import java.util.List;
 @RequestMapping(value = "excel")
 public class ExcelController extends BaseController{
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @PostMapping(value = "/upload")
     public Result upload(@RequestParam("file") MultipartFile file) {
-
         if (ObjectUtils.isEmpty(file)) {
             return Result.fail_500("文件不能为空");
         }
@@ -61,6 +61,38 @@ public class ExcelController extends BaseController{
                 return Result.fail_500("上传失败" + e.getMessage());
             }
         }
+    }
+
+    @PostMapping(value = "/easy")
+    public Result easyUpload(@RequestParam("file") MultipartFile file) throws IOException{
+        if (ObjectUtils.isEmpty(file)) {
+            return Result.fail_500("文件不能为空");
+        }
+        EasyExcel.read(file.getInputStream(), DemoData.class, new DemoDataListener(new DemoDAO())).sheet().doRead();
+        return Result.ok("模板文件上传成功");
+    }
+
+    /**
+     * 毕业要求模板上传
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @PostMapping(value = "/demand")
+    public Result demandUpload(@RequestParam("file") MultipartFile file) throws IOException{
+        if (ObjectUtils.isEmpty(file)) {
+            return Result.fail_500("文件不能为空");
+        }
+        Result result = Result.fail_500("上传失败");
+        EasyExcel.read(file.getInputStream(), new DemandListener() {
+            @Override
+            protected void onResult(List<Demand_1> demand1List) {
+                result.setCode(Const.HttpStatusCode.HttpStatus_200);
+                result.setMsg("毕业要求模板上传成功");
+                result.setData(demand1List);
+            }
+        }).sheet().doRead();
+        return result;
     }
 
 }
