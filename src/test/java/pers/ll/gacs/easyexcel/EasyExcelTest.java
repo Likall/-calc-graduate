@@ -4,10 +4,12 @@ import com.alibaba.excel.EasyExcel;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class EasyExcelTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         new EasyExcelTest().simpleRead();
     }
 
@@ -18,10 +20,13 @@ public class EasyExcelTest {
      * <p>3. 直接读即可
      */
     @Test
-    public void simpleRead() {
-        String fileName = TestFileUtil.getPath() + "pers/ll/gacs/easyexcel" + File.separator + "demo.xlsx";
-//        String fileName = "C:\\Users\\ZJC\\Desktop\\demo.xlsx";
-        // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+    public void simpleRead() throws FileNotFoundException {
+//        String fileName = TestFileUtil.getPath() + "pers/ll/gacs/easyexcel" + File.separator + "demo.xlsx";
+        String fileName = "C:\\Users\\ZJC\\Desktop\\demo.xlsx";
+//        File file = new File(fileName);
+//        FileInputStream inputStream = new FileInputStream(file);
+//        // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+//        EasyExcel.read(inputStream, DemoData.class, new DemoDataListener()).sheet().doRead();
         EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
     }
 }

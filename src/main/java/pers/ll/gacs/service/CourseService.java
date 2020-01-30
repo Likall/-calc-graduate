@@ -42,4 +42,9 @@ public class CourseService implements ICourseService {
     public boolean deleteCourseById(Course course) {
         return courseMapper.deleteCourseByCourseId(course.getCourseId()) > 0;
     }
+
+    @Override
+    public void save(List<Course> courseList) {
+
+    }
 }

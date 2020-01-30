@@ -17,4 +17,6 @@ public interface CourseMapper {
     int updateCourseByCourseId(Course course);
 
     int deleteCourseByCourseId(String id);
+
+    int save(List<Course> courseList);
 }

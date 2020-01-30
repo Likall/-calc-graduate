@@ -5,6 +5,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pers.ll.gacs.po.Course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author Jiaju Zhuang
  */
 // 有个很重要的点 DemoDataListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
-public class DemoDataListener extends AnalysisEventListener<DemoData> {
+public abstract class DemoDataListener extends AnalysisEventListener<DemoData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoDataListener.class);
     /**
      * 每隔5条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
@@ -52,6 +53,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
     public void invoke(DemoData data, AnalysisContext context) {
         LOGGER.info("解析到一条数据:{}", JSON.toJSONString(data));
         list.add(data);
+        onResult(list, false);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (list.size() >= BATCH_COUNT) {
             saveData();
@@ -70,6 +72,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
         // 这里也要保存数据，确保最后遗留的数据也存储到数据库
         saveData();
         LOGGER.info("所有数据解析完成！");
+        onResult(list, true);
     }
 
     /**
@@ -80,4 +83,6 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
         demoDAO.save(list);
         LOGGER.info("存储数据库成功！");
     }
+
+    public abstract void onResult(List<DemoData> list, boolean finish);
 }

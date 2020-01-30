@@ -13,4 +13,6 @@ public interface ICourseService {
     boolean updateCourseById(Course course);
 
     boolean deleteCourseById(Course course);
+
+    void save(List<Course> courseList);
 }

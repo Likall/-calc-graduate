@@ -1,4 +1,4 @@
-package pers.ll.gacs.controller;
+package pers.ll.gacs.easyexcel;
 
 
 import com.alibaba.excel.context.AnalysisContext;
@@ -55,10 +55,6 @@ public abstract class DemandListener extends AnalysisEventListener<Map<Integer, 
         }
         list.add(data);
         onResult(demand1List, false);
-//        if (list.size() >= BATCH_COUNT) {
-//            saveData();
-//            list.clear();
-//        }
     }
 
     @Override
@@ -80,7 +76,7 @@ public abstract class DemandListener extends AnalysisEventListener<Map<Integer, 
 
     @Override
     public void onException(Exception exception, AnalysisContext context) throws Exception {
-        super.onException(exception, context);
+        LOGGER.info("读取出错", exception);
     }
 
     /**

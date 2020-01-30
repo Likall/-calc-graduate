@@ -1,16 +1,24 @@
 package pers.ll.gacs.po;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 public class Course {
+    @ExcelProperty(index = 0)
     private String courseId;
 
+    @ExcelProperty(index = 1)
     private String courseName;
 
+    @ExcelProperty(index = 2)
     private String courseCredit;
 
+    @ExcelProperty(index = 3)
     private String courseTerm;
 
+    @ExcelProperty(index = 5)
     private Double courseAverage;
 
+    @ExcelProperty(index = 4)
     private String courseTotalGrade;
 
     public String getCourseId() {
