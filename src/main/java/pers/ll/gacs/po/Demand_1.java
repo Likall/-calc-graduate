@@ -1,6 +1,5 @@
 package pers.ll.gacs.po;
 
-import lombok.Data;
 
 import java.util.List;
 
