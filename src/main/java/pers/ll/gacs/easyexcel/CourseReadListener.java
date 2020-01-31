@@ -21,6 +21,7 @@ public abstract class CourseReadListener extends AnalysisEventListener<Course> {
     private List<Course> list = new ArrayList<>();
 
     public CourseReadListener(CourseService courseService) {
+        list.clear();
         this.courseService = courseService;
     }
 
@@ -35,7 +36,6 @@ public abstract class CourseReadListener extends AnalysisEventListener<Course> {
     public void invoke(Course data, AnalysisContext context) {
         LOGGER.info("解析到一条数据:{}", JSON.toJSONString(data));
         list.add(data);
-        onResult(list, false);
     }
 
     /**
@@ -47,8 +47,9 @@ public abstract class CourseReadListener extends AnalysisEventListener<Course> {
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要保存数据，确保最后遗留的数据也存储到数据库
         LOGGER.info("所有数据解析完成！");
-        onResult(list, true);
+        onResult(list);
+        courseService.save(list);
     }
 
-    public abstract void onResult(List<Course> list, boolean finish);
+    public abstract void onResult(List<Course> list);
 }

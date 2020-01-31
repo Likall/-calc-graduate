@@ -45,6 +45,6 @@ public class CourseService implements ICourseService {
 
     @Override
     public void save(List<Course> courseList) {
-
+        courseMapper.save(courseList);
     }
 }

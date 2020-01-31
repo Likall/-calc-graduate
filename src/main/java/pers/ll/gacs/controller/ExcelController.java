@@ -24,19 +24,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "excel")
-public class ExcelController extends BaseController{
+public class ExcelController extends BaseController {
 
     @Autowired
     CourseService courseService;
 
     /**
      * 毕业要求数据上传
+     *
      * @param file
      * @return
      * @throws IOException
      */
     @PostMapping(value = "/demand")
-    public Result demandUpload(@RequestParam("file") MultipartFile file) throws IOException{
+    public Result demandUpload(@RequestParam("file") MultipartFile file) throws IOException {
         if (ObjectUtils.isEmpty(file)) {
             return Result.fail_500("文件不能为空");
         }
@@ -58,23 +59,25 @@ public class ExcelController extends BaseController{
         return result;
     }
 
+    /**
+     * 课程信息数据上传
+     *
+     * @param file
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/course")
     public Result courseUpload(@RequestParam("file") MultipartFile file) throws Exception {
         if (ObjectUtils.isEmpty(file)) {
             return Result.fail_500("文件不能为空");
         }
         Result result = Result.fail_500("上传失败");
-        List<Course> courses = new ArrayList<>();
         EasyExcel.read(file.getInputStream(), Course.class, new CourseReadListener(courseService) {
             @Override
-            public void onResult(List<Course> list, boolean finish) {
-                if (finish) {
-                    result.setCode(Const.HttpStatusCode.HttpStatus_200);
-                    result.setMsg("课程信息上传成功");
-                    result.setData(courses);
-                } else {
-                    courses.addAll(list);
-                }
+            public void onResult(List<Course> list) {
+                result.setCode(Const.HttpStatusCode.HttpStatus_200);
+                result.setMsg("课程信息上传成功");
+                result.setData(list);
             }
         }).sheet().doRead();
         return result;
